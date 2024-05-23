@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - Universe</title>
+    <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
+    <!-- Toastify  -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <!-- Custom Css  -->
+    <link rel="stylesheet" href="stylesheets/signup.css">
+</head>
+
+<body>
+    <div id="box">
+        <form action="/signup" method="post" enctype="multipart/form-data">
+            <div>
+                <label for="username" id="first-label">Name : </label>
+                <input type="text" name="username" id="username" placeholder="Enter Your Name Here">
+                <p class="error username">Username is required</p>
+            </div>
+            <div>
+                <label for="email">Email : </label>
+                <input type="email" name="email" id="email" placeholder="Enter Your Email Here">
+                <p class="error email">Email is required</p>
+            </div>
+            <div>
+                <label for="password">Password : </label>
+                <input type="password" name="password" id="password" placeholder="Enter A Password Here">
+                <p class="error password">Password is required</p>
+            </div>
+            <div>
+                <label for="avatar">Upload Profile Picture : </label>
+                <input type="file" name="avatar" id="avatar" placeholder="Enter You Name Here">
+                <p class="error avatar">Avatar is required</p>
+                <p class="error common">Common is required</p>
+            </div>
+            <button type="submit">Create Account</button>
+        </form>
+    </div>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script>
+        const signupForm = document.querySelector("#box form");
+
+        signupForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const allErrors = document.querySelectorAll(".error");
+            Array.from(allErrors).map((err) => {
+                err.style.display = "none";
+            })
+
+            const formData = new FormData(signupForm);
+
+            const response = await fetch("/signup", {
+                method: "POST",
+                body: formData
+            });
+            const result = await response.json();
+
+            if (!result.errors) {
+                // reset form
+                signupForm.reset();
+
+                // show toast
+                Toastify({
+                    text: "Successfully Created Account!🎉🎇",
+                    duration: 1000
+                }).showToast();
+
+                // replace home page
+                setTimeout(() => {
+                    location.replace("/home");
+                }, 1000)
+            } else {
+                Object.values(result.errors).map((error) => {
+                    const err = document.querySelector(`.${error.path}`);
+
+                    err.style.display = "block";
+                    err.innerText = `${error.msg}`;
+                })
+            }
+
+        })
+    </script>
+</body>
+
+</html>

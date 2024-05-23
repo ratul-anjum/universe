@@ -1,0 +1,311 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: cursive;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    background-color: aliceblue;
+}
+
+#main {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+#box1,
+#box2 {
+    width: 50%;
+}
+
+#box1 {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+
+#box1 img {
+    width: 20%;
+}
+
+#box1 p {
+    text-align: right;
+    font-size: 2.5vw;
+    line-height: 3.5vw;
+    font-weight: 600;
+    margin: 1rem 2rem 0 0;
+}
+
+#box2 form {
+    height: auto;
+    width: 55%;
+    background: linear-gradient(#22B1FF, #192d458f);
+    padding: 1.5rem;
+    border-radius: 3px;
+    box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.42);
+}
+
+#box2 form label {
+    display: block;
+    color: white;
+    font-weight: 600;
+    font-size: 1.3vw;
+    margin-top: .8rem;
+}
+
+#box2 form .first-label {
+    margin-top: 0;
+}
+
+#box2 form input {
+    border: none;
+    outline: none;
+    margin-top: .6rem;
+    padding: .3rem .5rem;
+    border-radius: 1px;
+    width: 100%;
+    font-size: 1.25vw;
+}
+
+#box2 form input::placeholder {
+    font-size: 1.1vw;
+    font-weight: 600;
+    color: rgba(128, 128, 128, 0.397);
+}
+
+#box2 form button {
+    border: none;
+    outline: none;
+    background: linear-gradient(#22B1FF, #192d458f);
+    padding: .4rem .8rem;
+    border-radius: 4px;
+    color: white;
+    font-size: 1.25vw;
+    font-weight: 700;
+    margin: 1.5rem 0;
+}
+
+#box2 form button:hover,
+#box2 form #new-account:hover {
+    cursor: pointer;
+    color: rgb(1, 14, 156);
+    background: linear-gradient(#53bef7e3, #9fa1a4e6);
+}
+
+#box2 form #new-account {
+    background: linear-gradient(#22B1FF, #192d458f);
+    padding: .4rem .8rem;
+    border-radius: 4px;
+    color: white;
+    font-size: 1.25vw;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+
+.error {
+    color: #32ff7e;
+    margin: .4rem 0 .6rem 0;
+    font-size: 1.2vw;
+    display: none;
+}
+
+.error.common,
+.error.password {
+    margin-bottom: 0;
+}
+
+
+@media screen and (max-width: 1200px) {
+    #box2 form {
+        width: 70%;
+    }
+
+    #box2 form label {
+        font-size: 1.6vw;
+    }
+
+    #box2 form input {
+        font-size: 1.7vw;
+    }
+
+    #box2 form input::placeholder {
+        font-size: 1.3vw;
+    }
+
+    #box2 form button,
+    #box2 form #new-account {
+        font-size: 1.6vw;
+    }
+
+    .error {
+        font-size: 1.4vw;
+    }
+}
+
+
+@media screen and (max-width: 992px) {
+    #main {
+        flex-direction: column;
+    }
+
+    #box1 {
+        justify-content: center;
+        margin-bottom: 2rem;
+    }
+
+    #box1 img {
+        width: 25%;
+    }
+
+    #box1 p {
+        font-size: 2.7vw;
+    }
+
+    #box2 form {
+        margin: auto;
+        width: 90%;
+    }
+
+    #box2 form label {
+        font-size: 1.8vw;
+    }
+
+    #box2 form input {
+        font-size: 1.9vw;
+    }
+
+    #box2 form input::placeholder {
+        font-size: 1.6vw;
+    }
+
+    #box2 form button {
+        font-size: 1.9vw;
+    }
+
+    #box2 form #new-account {
+        font-size: 1.9vw;
+    }
+
+    .error {
+        font-size: 1.7vw;
+    }
+}
+
+@media screen and (max-width: 768px) {
+
+    #box1,
+    #box2 {
+        width: 65%;
+    }
+
+    #box1 p {
+        font-size: 3.3vw;
+        line-height: 4.5vw;
+    }
+
+    #box2 form label {
+        font-size: 2.5vw;
+    }
+
+    #box2 form input {
+        font-size: 2.8vw;
+    }
+
+    #box2 form input::placeholder {
+        font-size: 2.2vw;
+    }
+
+    #box2 form button,
+    #box2 form #new-account {
+        font-size: 2.5vw;
+    }
+
+    .error {
+        font-size: 2.3vw;
+    }
+}
+
+@media screen and (max-width: 576px) {
+
+    #box1,
+    #box2 {
+        width: 85%;
+    }
+
+    #box1 p {
+        font-size: 4.5vw;
+        line-height: 5.5vw;
+    }
+
+    #box2 form {
+        width: 95%;
+    }
+
+    #box2 form label {
+        font-size: 3.5vw;
+    }
+
+    #box2 form input {
+        font-size: 3.8vw;
+    }
+
+    #box2 form input::placeholder {
+        font-size: 3vw;
+    }
+
+    #box2 form button,
+    #box2 form #new-account {
+        font-size: 3.5vw;
+    }
+
+    .error {
+        font-size: 3.1vw;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    #main {
+        justify-content: flex-start;
+        padding-top: .7rem;
+    }
+
+    #box1,
+    #box2 {
+        width: 92%;
+    }
+
+    #box1 {
+        margin-bottom: 1.4rem;
+    }
+
+    #box1 p {
+        font-size: 4.7vw;
+        line-height: 5.7vw;
+    }
+
+    #box2 form input {
+        font-size: 4.1vw;
+    }
+
+    #box2 form input::placeholder {
+        font-size: 3.5vw;
+    }
+
+    #box2 form label,
+    #box2 form button,
+    #box2 form #new-account {
+        font-size: 4vw;
+    }
+
+    .error {
+        font-size: 3.6vw;
+    }
+}

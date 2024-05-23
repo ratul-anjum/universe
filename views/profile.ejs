@@ -1,0 +1,63 @@
+<%- include("partials/header") %>
+    <div id="post">
+        <div id="user-post">
+            <div class="title">
+                <div>
+                    <img src="avatars/<%= loggedInUser.avatar %>" alt="<%= loggedInUser.name %>-profile-pic">
+                    <br>
+                    <a href="/profile">
+                        <%= loggedInUser.name %>
+                    </a>
+                </div>
+                <i class="fa-solid fa-xmark" id="cross"></i>
+            </div>
+            <form action="/home/post" method="post" enctype="multipart/form-data">
+                <textarea name="postText" id="post-text" cols="30" rows="10"></textarea>
+                <div>
+                    <label for="post-attachment"><i class="fa-regular fa-image"></i></label>
+                    <input type="file" name="post-attachment" id="post-attachment">
+                </div>
+                <button type="submit" id="post-btn">Post</button>
+            </form>
+        </div>
+    </div>
+    <main>
+        <div class="profile-header">
+            <img src="images/cover-photo.jpg" alt="profile-bg" class="profile-bg">
+            <div class="profile">
+                <img src="avatars/<%= loggedInUser.avatar %>" alt="<%= loggedInUser.name %>-profile-pic">
+                <p>
+                    <%= loggedInUser.name %>
+                </p>
+            </div>
+        </div>
+        <div class="start-post">
+            <input type="text" placeholder="Start A Post" id="start-post-input">
+        </div>
+        <div class="all-posts">
+            <% allPosts.forEach((post)=>{ %>
+                <div class="post">
+                    <div class="title">
+                        <img src="avatars/<%= post.creator.avatar %>" alt="<%= post.creator.name %>-profile-pic">
+                        <div>
+                            <a href="/profile">
+                                <%= post.creator.name %>
+                            </a>
+                            <p>
+                                <%= moment(post.createdAt).fromNow() %>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="body">
+                        <p>
+                            <%= post.text %>
+                        </p>
+                        <% if(post.attachment.length !==0){ %>
+                            <img src="attachments/<%= post.attachment %>" alt=" <%= post.creator.name %>-attachment">
+                            <% } %>
+                    </div>
+                </div>
+                <% }) %>
+        </div>
+    </main>
+    <%- include("partials/footer") %>

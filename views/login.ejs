@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Universe</title>
+    <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
+    <!-- Toastify  -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <!-- Custom Css  -->
+    <link rel="stylesheet" href="stylesheets/login.css">
+</head>
+
+<body>
+    <div id="main">
+        <div id="box1">
+            <img src="images/logo.png" alt="logo">
+            <p>Connecting Hearts, <br> One Swipe at a Time</p>
+        </div>
+        <div id="box2">
+            <form action="/" method="post">
+                <div>
+                    <label for="email" class="first-label">Email : </label>
+                    <input type="email" name="email" id="email" placeholder="Enter Your Email Here">
+                    <p class="error email">Email is required</p>
+                </div>
+                <div>
+                    <label for="password">Password : </label>
+                    <input type="password" name="password" id="password" placeholder="Enter Your Password Here">
+                    <p class="error password">Password is required</p>
+                    <p class="error common">Something Broke</p>
+                </div>
+                <button type="submit">Login</button>
+                <br>
+                <a href="/signup" id="new-account">Create New Account</a>
+            </form>
+
+        </div>
+    </div>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script>
+        const loginForm = document.querySelector("#box2 form");
+
+        loginForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            // all errors display none
+            const allErrors = document.querySelectorAll(".error");
+            Array.from(allErrors).map((err) => {
+                err.style.display = "none";
+            });
+
+            const formData = new FormData(loginForm);
+            const formObject = Object.fromEntries(formData);
+
+            const response = await fetch("/", {
+                method: "POST",
+                body: JSON.stringify(formObject),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            });
+
+            const result = await response.json();
+
+            if (!result.errors) {
+                // reset form
+                loginForm.reset();
+
+                // show toast
+                Toastify({
+                    text: "Successfully Logged In! 🎉",
+                    duration: 1000
+                }).showToast();
+
+                // replace home page
+                setTimeout(() => {
+                    location.replace("/home");
+                }, 1000);
+            } else {
+                Object.values(result.errors).map((error) => {
+                    const err = document.querySelector(`.${error.path}`);
+
+                    err.style.display = "block";
+                    err.innerText = `${error.msg}`;
+                })
+            }
+        })
+    </script>
+</body>
+
+</html>
